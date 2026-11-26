@@ -230,7 +230,7 @@ function applyStats(n,a,ta,b,tb){
  NT=n;[0,1].forEach(k=>{if(scr===k+2&&SRUN[k])animN(k,n)});
  if(!n){PCT[0]=PCT[1]=null;sd.forEach(s=>s.textContent='아직 집계된 응답이 없습니다.');return}
  PCT[0]=Math.round(a/ta*100);PCT[1]=Math.round(b/tb*100);
- sd[0].innerHTML=`관람객의 ${PCT[0]}%가 타인이 자신을 의식하고 있다고 느낀다고 응답했습니다.`;sd[1].textContent=`관람객의 ${PCT[1]}%가 타인의 행동을 유심히 관찰하지 않는다고 응답했습니다.`;
+ sd[0].innerHTML=`관람객의 ${PCT[0]}%가 타인이 자신을 의식하고 있다고 느낀다고 응답했습니다.`;sd[1].textContent=`관람객의 ${PCT[1]}%만이 타인의 행동을 유심히 관찰한다고 응답했습니다.`;
  [0,1].forEach(k=>{if(scr===k+2&&SRUN[k]){place(k,String(PCT[k]).length);animateTo(k,PCT[k],afterCount(k))}})}
 function subscribe(){db.collection('responses').onSnapshot(s=>render(s.docs),()=>{sd.forEach(x=>x.textContent='통계를 불러오지 못했습니다.')})}
 let statsOk=false;
