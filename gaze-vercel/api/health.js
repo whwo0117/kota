@@ -36,8 +36,8 @@ module.exports = async (req, res) => {
     const f = await fetch(`${url}/rest/v1/rpc/gaze_stats`, { method: 'POST', headers: hdr(key), body: '{}' });
     out.function_http = f.status;
     const txt = await f.text();
-    if (f.ok) out.stats = JSON.parse(txt); else out.function_detail = txt.slice(0, 300);
-    out.status = t.ok && f.ok ? 'ok' : 'problem: see table_detail / function_detail';
+    if (f.ok) { out.stats = JSON.parse(txt); if (out.stats.v !== 2) out.function_detail = 'OUTDATED: run the latest supabase.sql again'; } else out.function_detail = txt.slice(0, 300);
+    out.status = t.ok && f.ok && !out.function_detail ? 'ok' : 'problem: see table_detail / function_detail';
   } catch (e) {
     out.status = 'cannot reach Supabase: check SUPABASE_URL';
     out.detail = String((e && e.message) || e);
